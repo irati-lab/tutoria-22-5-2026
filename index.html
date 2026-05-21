@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>Tutoría 3º ESO - 22 de Mayo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #10B981;
+            --bg-color: #F3F4F6;
+            --card-bg: #FFFFFF;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+
+        p.subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Tabs System */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            background-color: var(--card-bg);
+            border: 2px solid transparent;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        h2 {
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 10px;
+        }
+
+        /* Cards & Lists */
+        .notice-card {
+            background-color: #F9FAFB;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .notice-card.urgent { border-left-color: var(--danger); }
+        .notice-card.warning { border-left-color: var(--warning); }
+        .notice-card.success { border-left-color: var(--secondary); background-color: #ECFDF5; }
+
+        .btn-link {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .btn-link:hover {
+            background-color: var(--primary-hover);
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-left: 10px;
+        }
+
+        li { margin-bottom: 10px; }
+
+        /* Playlab Section Special Styling */
+        .playlab-box {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .playlab-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .use-case {
+            background: white;
+            color: var(--text-dark);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 600px) {
+            .tab-btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>👋 ¡Tutoría 3º ESO!</h1>
+        <p class="subtitle">Miércoles, 22 de Mayo</p>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('avisos', this)">📢 Avisos e Info</button>
+        <button class="tab-btn" onclick="openTab('examenes', this)">📝 Exámenes y Tareas</button>
+        <button class="tab-btn" onclick="openTab('plan', this)">🏃‍♂️ Plan de Hoy</button>
+        <button class="tab-btn" onclick="openTab('playlab', this)">🤖 Herramienta Playlab</button>
+    </div>
+
+    <div id="avisos" class="tab-content active">
+        <h2>📢 Avisos Importantes</h2>
+        
+        <div class="notice-card">
+            <strong>🗣️ Problemática de Tareas:</strong> Aitor Morillo ha llevado el tema al consejo escolar. El próximo <strong>lunes</strong> tendréis un espacio de reunión para trasladar cualquier tema de cara al consejo escolar del martes.
+        </div>
+
+        <div class="notice-card urgent">
+            <strong>💉 Vacunación del Papiloma:</strong> Recordad que además del permiso firmado, es OBLIGATORIO traer la <strong>cartilla de vacunación</strong>.
+        </div>
+
+        <div class="notice-card">
+            <strong>📅 5 de Junio:</strong> Todo el alumnado deberá estar en HA.
+        </div>
+
+        <div class="notice-card">
+            <strong>📌 Carteles de profesorado voluntario:</strong> Se repartirán a lo largo de la mañana.
+        </div>
+
+        <h3>🔗 Enlaces y Formularios (¡Rellenar!)</h3>
+        <p>Por favor, dedicad un momento a completar lo siguiente:</p>
+        <a href="https://docs.google.com/document/d/1TxrqCLqp31TuflKAqqV-Fq09TIp_9NuO19KJ-Lva93M/edit?tab=t.rivr0tk19zyx" target="_blank" class="btn-link">📘 Ver Optativas (Curso 26-27)</a><br>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSejmLVEiYo0FfuGR0DxD7cjLYaSEpHiPeE078tAnroX5Etc2w/viewform" target="_blank" class="btn-link">🗳️ Votación Concurso de Agendas</a><br>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScPaYeFrlN7x74fRd06PVzpsOQRPp9wGEhT8iUHXknydlbzGg/viewform" target="_blank" class="btn-link">📊 Cuestionario de Satisfacción (Eus/Cas)</a>
+    </div>
+
+    <div id="examenes" class="tab-content">
+        <h2>📝 Exámenes y Tareas Pendientes</h2>
+        
+        <div class="notice-card urgent">
+            <h3>⚛️ Física (Repesca)</h3>
+            <p>El examen de repesca de Física lo haremos el <strong>jueves que viene</strong>. <br><br>⚠️ <em>Requisito:</em> Necesito que entréis a vuestro correo electrónico y leáis atentamente el <strong>feedback que os he mandado ayer martes (día 21)</strong>.</p>
+        </div>
+
+        <div class="notice-card warning">
+            <h3>⏳ Tareas Pendientes del Curso Pasado</h3>
+            <p>Controlad las fechas de entrega si tenéis materias pendientes. En concreto:<br><br>
+            📚 <strong>Valores Éticos:</strong> La fecha límite de entrega es antes del <strong>próximo viernes</strong> (el viernes de la semana que viene).</p>
+        </div>
+    </div>
+
+    <div id="plan" class="tab-content">
+        <h2>🏃‍♂️ Plan para Hoy</h2>
+        
+        <div class="notice-card success" style="text-align: center; padding: 30px;">
+            <h3 style="font-size: 1.5rem; color: var(--secondary); margin-bottom: 15px;">❌ Hoy NO hay clase de Religión</h3>
+            <p style="font-size: 1.2rem;">Después de esta sesión de tutoría nos vamos de excursión.</p>
+            <br>
+            <p style="font-size: 1.1rem;">🏛️ Destino: <strong>Casa de Cultura</strong></p>
+            <p style="font-size: 1.1rem;">🎨 Actividad: Ver la <strong>exposición de pequeños artistas</strong>.</p>
+        </div>
+    </div>
+
+    <div id="playlab" class="tab-content">
+        <h2>🤖 Revoluciona tu estudio con Playlab</h2>
+        
+        <div class="playlab-box">
+            <h3>Tu nuevo Tutor Inteligente</h3>
+            <p>He creado una herramienta que supondrá un "antes y un después" para preparar vuestros exámenes finales. Usa la ciencia y la neurociencia para ayudaros a aprender más en menos tiempo.</p>
+        </div>
+
+        <h3>💡 ¿Cómo usarlo a diario? (Ideas para clase)</h3>
+        
+        <div class="use-case">
+            <strong>📄 1. "Estudia con mis apuntes"</strong><br>
+            Súbele un PDF o copia y pega el texto de tu temario. La IA no inventará nada, solo te hará preguntas tipo examen ("Active Recall") basadas estrictamente en <em>tus</em> propios apuntes.
+        </div>
+
+        <div class="use-case">
+            <strong>📅 2. "Hazme un plan realista"</strong><br>
+            Dile cuánto tiempo libre tienes exactamente esta semana y qué exámenes te cuestan más. Te hará un cronograma realista dividiendo la tarea para que no te agobies.
+        </div>
+
+        <div class="use-case">
+            <strong>🧠 3. "Me cuesta concentrarme"</strong><br>
+            Si te distraes rápido, tienes ansiedad por los exámenes o te cuesta leer textos largos, ¡díselo! La herramienta está preparada para adaptar tu estudio usando "micro-bloques" de 15 minutos, listas cortas o resúmenes visuales para facilitarte la vida.
+        </div>
+
+        <div class="use-case">
+            <strong>🗣️ 4. Euskera o Castellano</strong><br>
+            Tú eliges el idioma desde el primer mensaje y todo el entorno de estudio se adaptará a lo que te resulte más cómodo.
+        </div>
+
+        <p style="margin-top: 20px; font-weight: bold; text-align: center; color: var(--primary);">¡Usadlo a diario! Os aseguro que notaréis la diferencia de cara a los exámenes finales.</p>
+    </div>
+
+</div>
+
+<script>
+    function openTab(tabName, element) {
+        // Ocultar todos los contenidos
+        var contents = document.getElementsByClassName("tab-content");
+        for (var i = 0; i < contents.length; i++) {
+            contents[i].classList.remove("active");
+        }
+        
+        // Quitar la clase active de todos los botones
+        var buttons = document.getElementsByClassName("tab-btn");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove("active");
+        }
+        
+        // Mostrar el contenido seleccionado y activar el botón
+        document.getElementById(tabName).classList.add("active");
+        element.classList.add("active");
+    }
+</script>
+
+</body>
+</html>
