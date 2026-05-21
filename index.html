@@ -15,6 +15,7 @@
             --bg-card: #FFFFFF;
             --accent-blue: #2563EB;
             --accent-blue-hover: #1D4ED8;
+            --accent-purple: #8B5CF6;
             --text-main: #111827;
             --text-muted: #6B7280;
             --text-light: #F9FAFB;
@@ -234,35 +235,100 @@
         }
         .btn-outline:hover { background-color: #F9FAFB; }
 
-        /* Playlab Special Section */
-        .playlab-hero {
-            background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%);
+        /* --- PLAYLAB HACK SECTION STYLES --- */
+        .hack-hero {
+            background: linear-gradient(135deg, #0F172A 0%, #4C1D95 100%);
             border-radius: var(--radius);
             padding: 40px;
             color: white;
-            margin-bottom: 24px;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(76, 29, 149, 0.3);
         }
 
-        .playlab-hero h2 { font-size: 2rem; margin-bottom: 16px; }
-        .playlab-hero p { font-size: 1.1rem; color: #C7D2FE; margin-bottom: 24px; max-width: 600px; line-height: 1.6; }
-        
-        .playlab-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
+        .hack-hero h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #A78BFA, #34D399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .feature-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 16px;
+        .hack-hero p {
+            font-size: 1.1rem;
+            color: #E2E8F0;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .god-tier-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .god-tier-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--accent-purple);
+        }
+
+        .god-tier-card h4 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .god-tier-card p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        /* Fake Prompt Input Box */
+        .prompt-box {
+            background-color: #F8FAFC;
+            border: 1px solid #CBD5E1;
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #334155;
+            font-weight: 500;
         }
 
-        .feature-item h4 { font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;}
-        .feature-item p { font-size: 0.85rem; color: #E0E7FF; margin: 0; }
+        .prompt-box::before {
+            content: "Tú escribes:";
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--accent-purple);
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-challenge {
+            background: #ECFDF5;
+            border: 2px dashed #10B981;
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .cta-challenge h3 {
+            color: #065F46;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
 
         /* Animations */
         @keyframes fadeIn {
@@ -270,7 +336,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             body { flex-direction: column; }
             .sidebar { width: 100%; height: auto; padding: 15px 0; }
@@ -295,7 +360,7 @@
                 <i class="fa-solid fa-graduation-cap"></i> Académico
             </div>
             <div class="nav-item" onclick="showSection('playlab', this)">
-                <i class="fa-solid fa-robot"></i> Herramienta Playlab
+                <i class="fa-solid fa-bolt"></i> IA: Hackea tu Estudio
             </div>
             <div class="nav-item" onclick="showSection('enlaces', this)">
                 <i class="fa-solid fa-link"></i> Trámites y Enlaces
@@ -399,37 +464,84 @@
         </section>
 
         <section id="playlab" class="section">
-            <div class="playlab-hero">
-                <h2>Revoluciona tu Estudio</h2>
-                <p>Presentamos el nuevo Tutor Académico Inteligente. Diseñado con ciencia cognitiva para ayudaros a estudiar más rápido, memorizar mejor y gestionar el tiempo de cara a los exámenes finales.</p>
+            
+            <div class="hack-hero">
+                <h2>🧠 Hackea tu Estudio: Cómo sacarle chispas a tu IA</h2>
+                <p>Olvídate del típico bot que solo te escupe resúmenes aburridos y Wikipediazos. He creado esto para que sea <strong>tu entrenador personal de neuronas</strong>.</p>
+                <p>¿El objetivo? Usar ciencia cognitiva para meter la información en tu memoria a largo plazo con el <strong>menor esfuerzo inútil posible</strong>. Cero horas leyendo lo mismo mil veces. Más retener y más aprobar.</p>
                 
-                <a href="https://www.playlab.ai/project/cmp9w8k171hrvsn0w8go9jiwe" target="_blank" class="btn" style="width: auto; background-color: #10B981; font-size: 1.1rem; padding: 12px 24px;">
-                    <i class="fa-solid fa-rocket"></i> Acceder a Playlab
+                <a href="https://www.playlab.ai/project/cmp9w8k171hrvsn0w8go9jiwe" target="_blank" class="btn" style="width: auto; background-color: #34D399; color: #064E3B; font-weight: 700; font-size: 1.1rem; padding: 12px 24px; margin-top: 10px;">
+                    <i class="fa-solid fa-rocket"></i> Entrar a Playlab
                 </a>
             </div>
 
-            <h3 style="margin-bottom: 20px; font-size: 1.2rem;">¿Cómo puede ayudarte?</h3>
-            <div class="playlab-features">
-                <div class="feature-item" style="background: white; border-color: var(--border-color); color: var(--text-main);">
-                    <h4 style="color: var(--text-main);"><i class="fa-solid fa-file-pdf" style="color: var(--accent-blue);"></i> Estudia con TUS apuntes</h4>
-                    <p style="color: var(--text-muted);">Sube tus PDFs. La IA no inventa nada, te hará preguntas tipo examen ("Active Recall") basándose estrictamente en tu propio temario.</p>
+            <h3 class="section-title" style="font-size: 1.5rem; margin-bottom: 15px;">🟢 Lo Básico (Pero Efectivo)</h3>
+            <div class="grid-cards" style="margin-bottom: 40px;">
+                <div class="card">
+                    <h4 style="margin-bottom: 10px;"><i class="fa-solid fa-file-arrow-up" style="color: var(--accent-blue);"></i> 1. Cero teclear, sube tus apuntes</h4>
+                    <p style="font-size: 0.95rem; color: var(--text-muted);">Sube el PDF o pega el texto tal cual. La IA se lo lee y usa *solo* eso. No inventa nada que no caiga en tu examen.</p>
                 </div>
-                
-                <div class="feature-item" style="background: white; border-color: var(--border-color); color: var(--text-main);">
-                    <h4 style="color: var(--text-main);"><i class="fa-solid fa-calendar-check" style="color: var(--accent-blue);"></i> Planes Realistas</h4>
-                    <p style="color: var(--text-muted);">Dile cuánto tiempo libre tienes a la semana y te organizará un cronograma de estudio para que no te agobies al final.</p>
-                </div>
-
-                <div class="feature-item" style="background: white; border-color: var(--border-color); color: var(--text-main);">
-                    <h4 style="color: var(--text-main);"><i class="fa-solid fa-brain" style="color: var(--accent-blue);"></i> Estudio Adaptado</h4>
-                    <p style="color: var(--text-muted);">¿Te cuesta concentrarte o tienes ansiedad? Configúralo para hacer sesiones cortas (15 min) o pedirle la información en viñetas cortas.</p>
-                </div>
-
-                <div class="feature-item" style="background: white; border-color: var(--border-color); color: var(--text-main);">
-                    <h4 style="color: var(--text-main);"><i class="fa-solid fa-language" style="color: var(--accent-blue);"></i> Euskera o Castellano</h4>
-                    <p style="color: var(--text-muted);">Tú eliges el idioma de trabajo en el primer mensaje y todo tu entorno de estudio se adaptará.</p>
+                <div class="card">
+                    <h4 style="margin-bottom: 10px;"><i class="fa-solid fa-stopwatch" style="color: var(--accent-blue);"></i> 2. Test rápido (Active Recall)</h4>
+                    <p style="font-size: 0.95rem; color: var(--text-muted);">Pídele que te ponga a prueba sobre lo que acabas de subir. Obligar a tu cerebro a recordar es lo que realmente graba la información.</p>
                 </div>
             </div>
+
+            <h3 class="section-title" style="font-size: 1.5rem; margin-bottom: 15px;">🔥 Nivel Dios: Trucos que no se te habían ocurrido</h3>
+            <div class="god-tier-grid">
+                
+                <div class="god-tier-card">
+                    <h4>🎮 1. El modo "Videojuego/Aficiones"</h4>
+                    <p>¿Historia te parece un tostón? Cámbiale el contexto a algo que domines a la perfección para entender las estrategias.</p>
+                    <div class="prompt-box">
+                        "Explícame la Revolución Francesa como si fuera una partida del LOL (League of Legends) o usando términos de Minecraft."
+                    </div>
+                </div>
+
+                <div class="god-tier-card">
+                    <h4>🎤 2. Simulador de Entrevistas (Roleplay)</h4>
+                    <p>La mejor manera de estudiar Biología o personajes históricos es hablar *con* ellos, no leer *sobre* ellos.</p>
+                    <div class="prompt-box">
+                        "Actúa como si fueras la Célula Eucariota y déjame hacerte una entrevista para mi examen de biología. Hazme tú las preguntas a mí sobre tus orgánulos."
+                    </div>
+                </div>
+
+                <div class="god-tier-card">
+                    <h4>🚨 3. El Botón de Pánico (Modo Cero Energía)</h4>
+                    <p>Son las 9 de la noche, tienes examen mañana y tu cerebro está frito. No intentes leerlo todo, ve a lo seguro.</p>
+                    <div class="prompt-box">
+                        "Mañana tengo examen, estoy agotado y solo me quedan 15 minutos de batería mental. Hazme un repaso de supervivencia de 3 preguntas clave sobre las Leyes de Newton."
+                    </div>
+                </div>
+
+                <div class="god-tier-card">
+                    <h4>🎵 4. Canciones y Mnemotecnias RARAS</h4>
+                    <p>Tu cerebro olvida lo aburrido, pero recuerda perfectamente lo que es ridículo o suena bien.</p>
+                    <div class="prompt-box">
+                        "Invéntate un rap corto o una regla mnemotécnica súper rara (porque lo raro se recuerda mejor) para memorizar la tabla periódica."
+                    </div>
+                </div>
+
+                <div class="god-tier-card">
+                    <h4>😈 5. El Abogado del Diablo</h4>
+                    <p>Brutal para redacciones de Lengua o Filosofía. Si sabes qué te van a criticar, tu redacción será de 10.</p>
+                    <div class="prompt-box">
+                        "Tengo que escribir una redacción defendiendo el reciclaje. Dame los 3 argumentos en contra más difíciles para que yo intente rebatirlos."
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="cta-challenge">
+                <h3>🎯 Reto de hoy: ¡Rompe el hielo!</h3>
+                <p style="font-size: 1.1rem; color: #047857; margin-bottom: 20px;">
+                    Abre el chat ahora mismo. Sube un PDF de la asignatura <strong>que más odies</strong>, copia y pega uno de los comandos "Nivel Dios" adaptado a tu tema... y mira lo que pasa. 😉
+                </p>
+                <a href="https://www.playlab.ai/project/cmp9w8k171hrvsn0w8go9jiwe" target="_blank" class="btn" style="width: auto; background-color: #059669; font-size: 1.1rem;">
+                    Aceptar el Reto 🚀
+                </a>
+            </div>
+
         </section>
 
         <section id="enlaces" class="section">
