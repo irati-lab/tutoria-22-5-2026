@@ -2,305 +2,481 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-width=1.0">
-    <title>Tutoría 3º ESO - 22 de Mayo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoría 3º ESO | Panel de Información</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
         :root {
-            --primary: #4F46E5;
-            --primary-hover: #4338CA;
-            --secondary: #10B981;
-            --bg-color: #F3F4F6;
-            --card-bg: #FFFFFF;
-            --text-dark: #1F2937;
-            --text-light: #6B7280;
-            --danger: #EF4444;
-            --warning: #F59E0B;
+            --bg-body: #F3F4F6;
+            --bg-sidebar: #1F2937;
+            --bg-card: #FFFFFF;
+            --accent-blue: #2563EB;
+            --accent-blue-hover: #1D4ED8;
+            --text-main: #111827;
+            --text-muted: #6B7280;
+            --text-light: #F9FAFB;
+            --border-color: #E5E7EB;
+            --danger: #DC2626;
+            --warning: #D97706;
+            --success: #059669;
+            --radius: 12px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            line-height: 1.6;
-            padding: 20px;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            animation: fadeInDown 0.8s ease;
-        }
-
-        h1 {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-        }
-
-        p.subtitle {
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 280px;
+            background-color: var(--bg-sidebar);
             color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            padding: 24px 0;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            padding: 0 24px 24px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 24px;
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.85rem;
+            color: #9CA3AF;
+            margin-top: 4px;
+        }
+
+        .nav-item {
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #D1D5DB;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(255,255,255,0.05);
+            color: var(--text-light);
+        }
+
+        .nav-item.active {
+            background-color: rgba(37, 99, 235, 0.15);
+            color: var(--accent-blue);
+            border-left-color: var(--accent-blue);
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
             font-size: 1.1rem;
         }
 
-        /* Tabs System */
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-            justify-content: center;
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            position: relative;
         }
 
-        .tab-btn {
-            background-color: var(--card-bg);
-            border: 2px solid transparent;
-            padding: 12px 20px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-light);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .tab-btn:hover {
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .tab-btn.active {
-            background-color: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
-        }
-
-        /* Tab Content */
-        .tab-content {
+        .section {
             display: none;
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.4s ease forwards;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .tab-content.active {
+        .section.active {
             display: block;
         }
 
-        h2 {
-            color: var(--text-dark);
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--bg-color);
-            padding-bottom: 10px;
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
         }
 
-        /* Cards & Lists */
-        .notice-card {
-            background-color: #F9FAFB;
-            border-left: 4px solid var(--primary);
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 0 8px 8px 0;
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-size: 1rem;
         }
 
-        .notice-card.urgent { border-left-color: var(--danger); }
-        .notice-card.warning { border-left-color: var(--warning); }
-        .notice-card.success { border-left-color: var(--secondary); background-color: #ECFDF5; }
+        /* --- CARDS & WIDGETS --- */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
 
-        .btn-link {
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background-color: #EFF6FF;
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .card-body p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+        }
+
+        .card-body strong {
+            color: var(--text-main);
+        }
+
+        /* Status Tags */
+        .tag {
             display: inline-block;
-            background-color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .tag-urgent { background-color: #FEE2E2; color: var(--danger); }
+        .tag-info { background-color: #E0F2FE; color: #0284C7; }
+        .tag-success { background-color: #D1FAE5; color: var(--success); }
+
+        /* Buttons & Links */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: var(--accent-blue);
             color: white;
             text-decoration: none;
-            padding: 10px 20px;
             border-radius: 8px;
-            font-weight: 600;
-            margin-top: 10px;
-            transition: background 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: background-color 0.2s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
         }
 
-        .btn-link:hover {
-            background-color: var(--primary-hover);
-        }
-
-        ul {
-            list-style-position: inside;
-            margin-left: 10px;
-        }
-
-        li { margin-bottom: 10px; }
-
-        /* Playlab Section Special Styling */
-        .playlab-box {
-            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+        .btn:hover { background-color: var(--accent-blue-hover); }
         
-        .playlab-box h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+        .btn-outline:hover { background-color: #F9FAFB; }
+
+        /* Playlab Special Section */
+        .playlab-hero {
+            background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%);
+            border-radius: var(--radius);
+            padding: 40px;
+            color: white;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .use-case {
-            background: white;
-            color: var(--text-dark);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            text-align: left;
+        .playlab-hero h2 { font-size: 2rem; margin-bottom: 16px; }
+        .playlab-hero p { font-size: 1.1rem; color: #C7D2FE; margin-bottom: 24px; max-width: 600px; line-height: 1.6; }
+        
+        .playlab-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
         }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-item h4 { font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;}
+        .feature-item p { font-size: 0.85rem; color: #E0E7FF; margin: 0; }
 
         /* Animations */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        @media (max-width: 600px) {
-            .tab-btn { width: 100%; text-align: center; }
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; padding: 15px 0; }
+            .sidebar-header { margin-bottom: 10px; padding-bottom: 10px; }
+            .nav-item { padding: 10px 20px; }
+            .main-content { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>👋 ¡Tutoría 3º ESO!</h1>
-        <p class="subtitle">Miércoles, 22 de Mayo</p>
-    </header>
-
-    <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('avisos', this)">📢 Avisos e Info</button>
-        <button class="tab-btn" onclick="openTab('examenes', this)">📝 Exámenes y Tareas</button>
-        <button class="tab-btn" onclick="openTab('plan', this)">🏃‍♂️ Plan de Hoy</button>
-        <button class="tab-btn" onclick="openTab('playlab', this)">🤖 Herramienta Playlab</button>
-    </div>
-
-    <div id="avisos" class="tab-content active">
-        <h2>📢 Avisos Importantes</h2>
-        
-        <div class="notice-card">
-            <strong>🗣️ Problemática de Tareas:</strong> Aitor Morillo ha llevado el tema al consejo escolar. El próximo <strong>lunes</strong> tendréis un espacio de reunión para trasladar cualquier tema de cara al consejo escolar del martes.
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h1>Tutoría 3º ESO</h1>
+            <p>22 de Mayo</p>
         </div>
+        <nav>
+            <div class="nav-item active" onclick="showSection('resumen', this)">
+                <i class="fa-solid fa-house"></i> Panel General
+            </div>
+            <div class="nav-item" onclick="showSection('examenes', this)">
+                <i class="fa-solid fa-graduation-cap"></i> Académico
+            </div>
+            <div class="nav-item" onclick="showSection('playlab', this)">
+                <i class="fa-solid fa-robot"></i> Herramienta Playlab
+            </div>
+            <div class="nav-item" onclick="showSection('enlaces', this)">
+                <i class="fa-solid fa-link"></i> Trámites y Enlaces
+            </div>
+        </nav>
+    </aside>
 
-        <div class="notice-card urgent">
-            <strong>💉 Vacunación del Papiloma:</strong> Recordad que además del permiso firmado, es OBLIGATORIO traer la <strong>cartilla de vacunación</strong>.
-        </div>
+    <main class="main-content">
 
-        <div class="notice-card">
-            <strong>📅 5 de Junio:</strong> Todo el alumnado deberá estar en HA.
-        </div>
+        <section id="resumen" class="section active">
+            <h2 class="section-title">Panel de Información</h2>
+            <p class="section-subtitle">Avisos generales y plan del día.</p>
 
-        <div class="notice-card">
-            <strong>📌 Carteles de profesorado voluntario:</strong> Se repartirán a lo largo de la mañana.
-        </div>
+            <div class="grid-cards">
+                <div class="card" style="grid-column: 1 / -1; border-left: 4px solid var(--success);">
+                    <div class="card-header" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
+                        <div class="card-icon" style="background-color: #D1FAE5; color: var(--success);">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </div>
+                        <div>
+                            <span class="tag tag-success">Plan de Hoy</span>
+                            <h3 class="card-title">Excursión a la Casa de Cultura</h3>
+                        </div>
+                    </div>
+                    <div class="card-body" style="margin-top: 16px;">
+                        <p>Os recuerdo que hoy, inmediatamente después de esta sesión de tutoría, <strong>no hay clase de religión</strong>.</p>
+                        <p>Saldremos juntos hacia la Casa de Cultura para visitar la exposición de <strong>"Pequeños Artistas"</strong>.</p>
+                    </div>
+                </div>
 
-        <h3>🔗 Enlaces y Formularios (¡Rellenar!)</h3>
-        <p>Por favor, dedicad un momento a completar lo siguiente:</p>
-        <a href="https://docs.google.com/document/d/1TxrqCLqp31TuflKAqqV-Fq09TIp_9NuO19KJ-Lva93M/edit?tab=t.rivr0tk19zyx" target="_blank" class="btn-link">📘 Ver Optativas (Curso 26-27)</a><br>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSejmLVEiYo0FfuGR0DxD7cjLYaSEpHiPeE078tAnroX5Etc2w/viewform" target="_blank" class="btn-link">🗳️ Votación Concurso de Agendas</a><br>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScPaYeFrlN7x74fRd06PVzpsOQRPp9wGEhT8iUHXknydlbzGg/viewform" target="_blank" class="btn-link">📊 Cuestionario de Satisfacción (Eus/Cas)</a>
-    </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background-color: #FEE2E2; color: var(--danger);">
+                            <i class="fa-solid fa-syringe"></i>
+                        </div>
+                        <h3 class="card-title">Vacunación Papiloma</h3>
+                    </div>
+                    <div class="card-body">
+                        <span class="tag tag-urgent">Requisito Obligatorio</span>
+                        <p>Para poder recibir la vacuna, no basta con el permiso firmado. Es estrictamente necesario traer la <strong>cartilla de vacunación</strong>.</p>
+                    </div>
+                </div>
 
-    <div id="examenes" class="tab-content">
-        <h2>📝 Exámenes y Tareas Pendientes</h2>
-        
-        <div class="notice-card urgent">
-            <h3>⚛️ Física (Repesca)</h3>
-            <p>El examen de repesca de Física lo haremos el <strong>jueves que viene</strong>. <br><br>⚠️ <em>Requisito:</em> Necesito que entréis a vuestro correo electrónico y leáis atentamente el <strong>feedback que os he mandado ayer martes (día 21)</strong>.</p>
-        </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fa-regular fa-calendar-xmark"></i></div>
+                        <h3 class="card-title">Aviso: 5 de Junio</h3>
+                    </div>
+                    <div class="card-body">
+                        <span class="tag tag-info">Organización</span>
+                        <p>El día 5 de junio <strong>no habrá clase de religión</strong>. Por lo tanto, todo el alumnado deberá permanecer en el aula <strong>HA</strong> durante ese periodo.</p>
+                    </div>
+                </div>
 
-        <div class="notice-card warning">
-            <h3>⏳ Tareas Pendientes del Curso Pasado</h3>
-            <p>Controlad las fechas de entrega si tenéis materias pendientes. En concreto:<br><br>
-            📚 <strong>Valores Éticos:</strong> La fecha límite de entrega es antes del <strong>próximo viernes</strong> (el viernes de la semana que viene).</p>
-        </div>
-    </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background-color: #F3F4F6; color: var(--text-main);">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                        <h3 class="card-title">Otros Avisos</h3>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>📝 Problemática de Tareas:</strong> Informaros de que Aitor Morillo ya trasladó este tema al consejo escolar y actualmente está en seguimiento.</p>
+                        <p><strong>📌 Carteles:</strong> Se van a repartir carteles para el profesorado voluntario.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <div id="plan" class="tab-content">
-        <h2>🏃‍♂️ Plan para Hoy</h2>
-        
-        <div class="notice-card success" style="text-align: center; padding: 30px;">
-            <h3 style="font-size: 1.5rem; color: var(--secondary); margin-bottom: 15px;">❌ Hoy NO hay clase de Religión</h3>
-            <p style="font-size: 1.2rem;">Después de esta sesión de tutoría nos vamos de excursión.</p>
-            <br>
-            <p style="font-size: 1.1rem;">🏛️ Destino: <strong>Casa de Cultura</strong></p>
-            <p style="font-size: 1.1rem;">🎨 Actividad: Ver la <strong>exposición de pequeños artistas</strong>.</p>
-        </div>
-    </div>
+        <section id="examenes" class="section">
+            <h2 class="section-title">Control Académico</h2>
+            <p class="section-subtitle">Fechas de exámenes de recuperación y entregas pendientes.</p>
 
-    <div id="playlab" class="tab-content">
-        <h2>🤖 Revoluciona tu estudio con Playlab</h2>
-        
-        <div class="playlab-box">
-            <h3>Tu nuevo Tutor Inteligente</h3>
-            <p>He creado una herramienta que supondrá un "antes y un después" para preparar vuestros exámenes finales. Usa la ciencia y la neurociencia para ayudaros a aprender más en menos tiempo.</p>
-        </div>
+            <div class="grid-cards">
+                <div class="card" style="border-left: 4px solid var(--accent-blue);">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fa-solid fa-atom"></i></div>
+                        <h3 class="card-title">Física (Repesca)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>El examen de recuperación se realizará el <strong>jueves de la semana que viene</strong>.</p>
+                        <div style="background-color: #EFF6FF; padding: 12px; border-radius: 8px; margin-top: 15px;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #1E3A8A;"><strong>⚠️ Tarea previa obligatoria:</strong> Entrad a vuestro correo escolar y leed atentamente el feedback personalizado que os envié ayer (día 21). Es clave para aprobar.</p>
+                        </div>
+                    </div>
+                </div>
 
-        <h3>💡 ¿Cómo usarlo a diario? (Ideas para clase)</h3>
-        
-        <div class="use-case">
-            <strong>📄 1. "Estudia con mis apuntes"</strong><br>
-            Súbele un PDF o copia y pega el texto de tu temario. La IA no inventará nada, solo te hará preguntas tipo examen ("Active Recall") basadas estrictamente en <em>tus</em> propios apuntes.
-        </div>
+                <div class="card" style="border-left: 4px solid var(--warning);">
+                    <div class="card-header">
+                        <div class="card-icon" style="background-color: #FEF3C7; color: var(--warning);">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <h3 class="card-title">Pendientes de 2º ESO</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Atención a los que tenéis asignaturas pendientes del curso pasado. Hay que controlar las fechas límite.</p>
+                        <p><strong>Valores Éticos:</strong> La entrega debe realizarse <strong>antes del próximo viernes</strong> (el de la semana que viene).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="use-case">
-            <strong>📅 2. "Hazme un plan realista"</strong><br>
-            Dile cuánto tiempo libre tienes exactamente esta semana y qué exámenes te cuestan más. Te hará un cronograma realista dividiendo la tarea para que no te agobies.
-        </div>
+        <section id="playlab" class="section">
+            <div class="playlab-hero">
+                <h2>Revoluciona tu Estudio</h2>
+                <p>Presentamos el nuevo Tutor Académico Inteligente. Diseñado con ciencia cognitiva para ayudaros a estudiar más rápido, memorizar mejor y gestionar el tiempo de cara a los exámenes finales.</p>
+                
+                <a href="https://www.playlab.ai/project/cmp9w8k171hrvsn0w8go9jiwe" target="_blank" class="btn" style="width: auto; background-color: #10B981; font-size: 1.1rem; padding: 12px 24px;">
+                    <i class="fa-solid fa-rocket"></i> Acceder a Playlab
+                </a>
+            </div>
 
-        <div class="use-case">
-            <strong>🧠 3. "Me cuesta concentrarme"</strong><br>
-            Si te distraes rápido, tienes ansiedad por los exámenes o te cuesta leer textos largos, ¡díselo! La herramienta está preparada para adaptar tu estudio usando "micro-bloques" de 15 minutos, listas cortas o resúmenes visuales para facilitarte la vida.
-        </div>
+            <h3 style="margin-bottom: 20px; font-size: 1.2rem;">¿Cómo puede ayudarte?</h3>
+            <div class="playlab-features">
+                <div class="feature-item" style="background: white; border-color: var(--border-color); color: var(--text-main);">
+                    <h4 style="color: var(--text-main);"><i class="fa-solid fa-file-pdf" style="color: var(--accent-blue);"></i> Estudia con TUS apuntes</h4>
+                    <p style="color: var(--text-muted);">Sube tus PDFs. La IA no inventa nada, te hará preguntas tipo examen ("Active Recall") basándose estrictamente en tu propio temario.</p>
+                </div>
+                
+                <div class="feature-item" style="background: white; border-color: var(--border-color); color: var(--text-main);">
+                    <h4 style="color: var(--text-main);"><i class="fa-solid fa-calendar-check" style="color: var(--accent-blue);"></i> Planes Realistas</h4>
+                    <p style="color: var(--text-muted);">Dile cuánto tiempo libre tienes a la semana y te organizará un cronograma de estudio para que no te agobies al final.</p>
+                </div>
 
-        <div class="use-case">
-            <strong>🗣️ 4. Euskera o Castellano</strong><br>
-            Tú eliges el idioma desde el primer mensaje y todo el entorno de estudio se adaptará a lo que te resulte más cómodo.
-        </div>
+                <div class="feature-item" style="background: white; border-color: var(--border-color); color: var(--text-main);">
+                    <h4 style="color: var(--text-main);"><i class="fa-solid fa-brain" style="color: var(--accent-blue);"></i> Estudio Adaptado</h4>
+                    <p style="color: var(--text-muted);">¿Te cuesta concentrarte o tienes ansiedad? Configúralo para hacer sesiones cortas (15 min) o pedirle la información en viñetas cortas.</p>
+                </div>
 
-        <p style="margin-top: 20px; font-weight: bold; text-align: center; color: var(--primary);">¡Usadlo a diario! Os aseguro que notaréis la diferencia de cara a los exámenes finales.</p>
-    </div>
+                <div class="feature-item" style="background: white; border-color: var(--border-color); color: var(--text-main);">
+                    <h4 style="color: var(--text-main);"><i class="fa-solid fa-language" style="color: var(--accent-blue);"></i> Euskera o Castellano</h4>
+                    <p style="color: var(--text-muted);">Tú eliges el idioma de trabajo en el primer mensaje y todo tu entorno de estudio se adaptará.</p>
+                </div>
+            </div>
+        </section>
 
-</div>
+        <section id="enlaces" class="section">
+            <h2 class="section-title">Trámites y Enlaces</h2>
+            <p class="section-subtitle">Formularios obligatorios que debéis rellenar.</p>
 
-<script>
-    function openTab(tabName, element) {
-        // Ocultar todos los contenidos
-        var contents = document.getElementsByClassName("tab-content");
-        for (var i = 0; i < contents.length; i++) {
-            contents[i].classList.remove("active");
+            <div class="grid-cards">
+                <div class="card">
+                    <div class="card-body" style="display: flex; flex-direction: column; gap: 15px;">
+                        
+                        <a href="https://docs.google.com/document/d/1TxrqCLqp31TuflKAqqV-Fq09TIp_9NuO19KJ-Lva93M/edit?tab=t.rivr0tk19zyx" target="_blank" class="btn btn-outline">
+                            <i class="fa-regular fa-file-lines"></i> Ver Optativas (Curso 26-27)
+                        </a>
+
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSejmLVEiYo0FfuGR0DxD7cjLYaSEpHiPeE078tAnroX5Etc2w/viewform" target="_blank" class="btn btn-outline">
+                            <i class="fa-solid fa-check-to-slot"></i> Votación Concurso de Agendas
+                        </a>
+
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScPaYeFrlN7x74fRd06PVzpsOQRPp9wGEhT8iUHXknydlbzGg/viewform" target="_blank" class="btn btn-outline">
+                            <i class="fa-solid fa-chart-pie"></i> Satisfacción del Alumnado
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function showSection(sectionId, element) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Quitar clase activa de los botones del menú
+            document.querySelectorAll('.nav-item').forEach(nav => {
+                nav.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Añadir clase activa al botón pulsado
+            element.classList.add('active');
         }
-        
-        // Quitar la clase active de todos los botones
-        var buttons = document.getElementsByClassName("tab-btn");
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove("active");
-        }
-        
-        // Mostrar el contenido seleccionado y activar el botón
-        document.getElementById(tabName).classList.add("active");
-        element.classList.add("active");
-    }
-</script>
-
+    </script>
 </body>
 </html>
